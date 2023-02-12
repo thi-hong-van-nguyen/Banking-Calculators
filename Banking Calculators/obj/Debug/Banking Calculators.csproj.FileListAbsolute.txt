@@ -1,0 +1,21 @@
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\Banking Calculators.exe.config
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\Banking Calculators.exe
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\Banking Calculators.pdb
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.csproj.AssemblyReference.cache
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.csproj.SuggestedBindingRedirects.cache
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\MainWindow.g.cs
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\App.g.cs
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators_MarkupCompile.cache
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators_MarkupCompile.lref
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\MainWindow.baml
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.g.resources
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking_Calculators.Properties.Resources.resources
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.csproj.GenerateResource.cache
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.csproj.CoreCompileInputs.cache
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.exe
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.pdb
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\FontAwesome.WPF.dll
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\FontAwesome.WPF.xml
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\obj\Debug\Banking Calculators.csproj.CopyComplete
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\Newtonsoft.Json.dll
+C:\Users\thi.nguyen\Desktop\Thi Nguyen\private files\Banking Calculators\Banking Calculators\bin\Debug\Newtonsoft.Json.xml
