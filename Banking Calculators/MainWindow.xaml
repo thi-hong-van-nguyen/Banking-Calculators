@@ -6,19 +6,115 @@
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:local="clr-namespace:Banking_Calculators" 
         mc:Ignorable="d"
-        Title="MainWindow" Height="800" Width="1100"
+        Title="Banking Calculators" Height="800" Width="1100"
         FontFamily="Roboto"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        Icon="/Images/twemoji_money-with-wings.png">
+    
     <Window.Resources>
         <!--Colors-->
-        <SolidColorBrush x:Key="PrimaryPurpleColor" Color="#917BE7"/>
-        <SolidColorBrush x:Key="PrimaryPinkColor" Color="#FCACDF"/>
-        <SolidColorBrush x:Key="SecondaryPinkColor" Color="#FFF5FD"/>
-        <SolidColorBrush x:Key="PrimaryGreyColor" Color="#c4c4c4"/>
+        <SolidColorBrush x:Key="BG_PrimaryPurpleColor" Color="#917BE7"/>
+        <SolidColorBrush x:Key="BG_PrimaryPinkColor" Color="#FF7BCF"/>
+        <SolidColorBrush x:Key="BG_SecondaryPinkColor" Color="#FFF5FD"/>
+        <SolidColorBrush x:Key="BG_PrimaryGreyColor" Color="#c4c4c4"/>
 
+        <Color x:Key="PrimaryPurpleColor">#917BE7</Color>
+        <Color x:Key="PrimaryPinkColor">#FF7BCF</Color>
+        <Color x:Key="SecondaryPinkColor">#FFF5FD</Color>
+        <Color x:Key="PrimaryGreyColor">#c4c4c4</Color>
+
+        <!--Round Buttons-->
+        <Style TargetType="Button" x:Key="RoundButton">
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Height" Value="43" />
+            <Setter Property="Width" Value="120" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border TextBlock.Foreground="{TemplateBinding Foreground}"
+                                x:Name="Border"
+                                CornerRadius="12"
+                                BorderThickness="1" Background="{TemplateBinding Background}">                            
+                            <TextBlock Text="{TemplateBinding Content}" 
+                                       Foreground="{TemplateBinding Foreground}"                                
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"/>                           
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Opacity" 
+                                                    Value="0.8" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
         
+        <!--Refresh button-->
+        <Style TargetType="Button" x:Key="RefreshButton">
+            <!--<Setter Property="Background" Value="Transparent"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>-->
+            <Setter Property="Margin" Value="0 0 5 0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <fa:ImageAwesome Icon="Refresh" Height="20" Opacity="0.5"/>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--Combox Box-->
+        <SolidColorBrush x:Key="ComboBoxNormalBorderBrush" Color="#e3e9ef" />
+        <ControlTemplate TargetType="ToggleButton" x:Key="ComboBoxToggleButtonTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="16" />
+                </Grid.ColumnDefinitions>
+                <Border Grid.ColumnSpan="2" Name="Border" BorderBrush="{DynamicResource BG_PrimaryGreyColor}" CornerRadius="12" BorderThickness="1, 1, 1, 1" Background="Transparent" />
+                <Path x:Name="Arrow" Grid.Column="1" HorizontalAlignment="Center" Margin="1,-1,0,0" VerticalAlignment="Center" Data="M 0 0 L 4 4 L 8 0 Z" Fill="Black"/>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="ComboBoxFlatStyle"  TargetType="{x:Type ComboBox}">
+            <Setter Property="Control.Template">
+        <Setter.Value>
+            <ControlTemplate TargetType="ComboBox">
+                        <Grid>
+                            <ToggleButton Name="PART_ToggleButton" Grid.Column="2" ClickMode="Press" Focusable="False" IsChecked="{Binding Path=IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Template="{StaticResource ComboBoxToggleButtonTemplate}"/>
+                            <ContentPresenter Name="ContentSite" Margin="20, 3, 23, 3" IsHitTestVisible="False" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{TemplateBinding ComboBox.SelectionBoxItem}" ContentTemplate="{TemplateBinding ComboBox.SelectionBoxItemTemplate}" ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"/>
+                            <TextBox Name="PART_EditableTextBox" Margin="3, 3, 23, 3" IsReadOnly="{TemplateBinding IsReadOnly}" Visibility="Hidden" Background="Transparent" HorizontalAlignment="Stretch" VerticalAlignment="Center" Focusable="True" >
+                                <TextBox.Template>
+                                    <ControlTemplate TargetType="TextBox" >
+                                        <Border Name="PART_ContentHost" Focusable="False" />
+                                    </ControlTemplate>
+                                </TextBox.Template>
+                            </TextBox>
+                            <Border Name="OutlineBoder" BorderBrush="LightBlue" IsHitTestVisible="False" />
+                            <!-- Popup showing items -->
+                            <Popup Name="PART_Popup" Placement="Bottom" Focusable="False" AllowsTransparency="True" IsOpen="{TemplateBinding ComboBox.IsDropDownOpen}" PopupAnimation="Slide">
+                                <Grid Name="DropDown" SnapsToDevicePixels="True" MinWidth="{TemplateBinding FrameworkElement.ActualWidth}" MaxHeight="{TemplateBinding ComboBox.MaxDropDownHeight}">
+                                    <Border Name="DropDownBorder" Background="White" Margin="0, 1, 0, 0" CornerRadius="0" BorderThickness="1,1,1,1" BorderBrush="{StaticResource ComboBoxNormalBorderBrush}"/>
+                                    <ScrollViewer Margin="4" SnapsToDevicePixels="True">
+                                        <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
+                                    </ScrollViewer>
+                                </Grid>
+                            </Popup>
+                        </Grid>
+                    </ControlTemplate>
+        </Setter.Value>
+    </Setter>
+</Style>
+
     </Window.Resources>
-    <Grid Background="{DynamicResource SecondaryPinkColor}" Width="1100" Height="800">
+    
+    <Grid Background="{DynamicResource BG_SecondaryPinkColor}" Width="1100" Height="800">
         <Grid Width="800" Height="600">
 
             <TabControl>
@@ -28,7 +124,8 @@
                             <Setter.Value>
                                 <ControlTemplate TargetType="TabItem">
                                     <Grid Name="Panel" Margin="0 0 0 10">
-                                        <Border Name="Border" CornerRadius="10" BorderThickness="0" BorderBrush="White" Margin="0,0,5,0"/>
+                                        <Border Name="Border" CornerRadius="10" BorderThickness="0" 
+                                                BorderBrush="White" Margin="0,0,5,0"/>
                                         <ContentPresenter Name="ContentSite"
                                         VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
@@ -37,10 +134,10 @@
                                     </Grid>
                                     <ControlTemplate.Triggers>
                                         <Trigger Property="IsSelected" Value="True">                                            
-                                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource PrimaryPurpleColor}" />
+                                            <Setter TargetName="Border" Property="Background" 
+                                                    Value="{DynamicResource BG_PrimaryPurpleColor}" />
                                             <Setter Property="Foreground" Value="White"/>
-                                        </Trigger>
-                                      
+                                        </Trigger>                                      
                                     </ControlTemplate.Triggers>
                                 </ControlTemplate>
                             </Setter.Value>
@@ -50,33 +147,65 @@
                 <TabItem Header="Currency Converter" FontSize="16">
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="150"/>
+                            <RowDefinition Height="180"/>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="120"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         
                         <!--Converted Amount-->
-                        <StackPanel Grid.Row="0" VerticalAlignment="Bottom">
-                            <Label HorizontalContentAlignment="Center" FontSize="28" FontWeight="Bold">226.33 EUR</Label>
-                            <Label HorizontalAlignment="Center" FontStyle="Italic" Padding=" 0 0 5 0">1 USD = 0.99 EUR</Label>
-                            <Label x:Name="convertedAmount" HorizontalContentAlignment="Center" FontSize="18"></Label>
-                            <Label x:Name="debugLabel" HorizontalContentAlignment="Center" FontSize="18"></Label>
+                        <StackPanel Grid.Row="0" VerticalAlignment="Center" Margin="0 20 0 0">
+                            <Label x:Name="convertedAmount" HorizontalContentAlignment="Center" 
+                                   FontSize="36" FontWeight="Bold"  Foreground="#58294C" FontFamily="Cascadia Code">
+                                Currency Converter
+                            </Label>
+                            <Label x:Name="exchangeRateLabel" HorizontalAlignment="Center" FontStyle="Italic"
+                                   FontSize="16"/>
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 10 0 20">
+                                <Button Click="RefreshClick" Style="{StaticResource RefreshButton}"></Button>
+                                <Label x:Name="exchangeRateDateLabel" HorizontalAlignment="Center" Opacity="0.5"
+                                       FontSize="14">
+                                    Exchange Rate Date:
+                                </Label>
+                            </StackPanel>
                         </StackPanel>
 
                         <!--Inputs-->
-                        <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal">
-                            <Label FontSize="18" VerticalContentAlignment="Center"> Amount:</Label>
-                            <TextBox Name="amount" Width="242" TextChanged="amount_TextChanged"/>
-                            <ComboBox Name="fromCurrency" Width="122"></ComboBox>
-                            <Image Height="100" Source="/Images/currency_exchange_logo.png"/>
-                            <ComboBox Name="toCurrency" Width="122"></ComboBox>
+                        <StackPanel Grid.Row="1" Height="50" Orientation="Horizontal" HorizontalAlignment="Center">
+                            <Label FontSize="18" VerticalContentAlignment="Center" Margin="-5 0 5 0"> Amount:</Label>
+                            <TextBox Name="amountToConvert" Width="242" TextChanged="amount_TextChanged" 
+                                     VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Padding="20 0" Margin="0 0 80 0"/>
+                            <ComboBox Name="fromCurrency" Style="{StaticResource ComboBoxFlatStyle}" Width="110"/>
+                            <Image Height="40" Margin="20 0" Source="/Images/currency_exchange_logo.png"/>
+                            <ComboBox Name="toCurrency" Style="{StaticResource ComboBoxFlatStyle}" Width="110"/>
                         </StackPanel>
 
                         <!--Buttons-->
                         <StackPanel Grid.Row="2" Height="54" Orientation="Horizontal" HorizontalAlignment="Center">
-                            <Button Margin="0 0 10 0" Click="ConvertClick">Convert</Button>
-                            <Button Margin="10 0 0 0">Cancel</Button>
+                            <Button Name="ConvertButton" Content="Convert" Style="{StaticResource RoundButton}" 
+                                    Foreground="White" Click="ConvertClick" Margin="0 0 10 0">                          
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#FCACDF" Offset="0.0"/>
+                                        <GradientStop Color="#FCACDF" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+
+                            <Button Name="CancelButton" Content="Cancel" Style="{StaticResource RoundButton}" 
+                                    Click="CancelClick" Margin="10 0 0 0">
+                                <Button.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                        <GradientStop Color="#c4c4c4" Offset="0.0"/>
+                                        <GradientStop Color="#c4c4c4" Offset="1.0"/>
+                                    </LinearGradientBrush>
+                                </Button.Background>
+                            </Button>
+                        </StackPanel>
+                        
+                        <!--Logo-->
+                        <StackPanel Grid.Row="3" Height="120" VerticalAlignment="Center">
+                            <Image Height="120" Source="/Images/cloud_kumo_logo.png"/>
                         </StackPanel>
                     </Grid>
 
@@ -89,5 +218,7 @@
                 </TabItem>
             </TabControl>
         </Grid>
+        
+        
     </Grid>
 </Window>
